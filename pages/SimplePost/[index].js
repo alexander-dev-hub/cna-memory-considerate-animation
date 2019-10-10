@@ -21,13 +21,13 @@ import posts from '../../data/posts';
 import Layout from '../../components/layout';
 import PostInfo from '../../components/PostInfo';
 
-const SimplePost = ({ post }) => {
+const SimplePost = ({ post, clientHintDeviceMemory }) => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
   return (
-    <Layout>
+    <Layout clientHintDeviceMemory={clientHintDeviceMemory}>
       <div className="container post">
         <div>
           <img src={`/static/images/${post.id}.jpg`} />
@@ -54,9 +54,10 @@ const SimplePost = ({ post }) => {
   );
 };
 
-SimplePost.getInitialProps = ({ query }) => {
-  let post = posts.find(post => post.id === parseInt(query.index));
-  return {post};
+SimplePost.getInitialProps = ({ query, req }) => {
+  const post = posts.find(post => post.id === parseInt(query.index));
+  const clientHintDeviceMemory = req ? req.headers['device-memory'] : null;
+  return {post, clientHintDeviceMemory};
 };
 
 export default SimplePost;

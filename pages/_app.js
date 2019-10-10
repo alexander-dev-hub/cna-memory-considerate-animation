@@ -10,21 +10,25 @@ const Loading = () => <Fragment>Loading...</Fragment>;
 const MyApp = ({ Component, pageProps, router }) => {
   const [manualEnabled, setManualEnabled] = useState(false);
   const [isAnimationOn, setIsAnimationOn] = useState(true);
+
   useEffect(() => {
     if (manualEnabled) {
       setManualEnabled(manualEnabled);
     }
-
     if (isAnimationOn) {
       setIsAnimationOn(isAnimationOn);
     }
   }, []);
-
-  const memoryStatus = useMemoryStatus();
-  if (!memoryStatus) return <Loading />;
-  const { overLoaded } = memoryStatus;
+  
+  const clientHintDeviceMemory = pageProps.clientHintDeviceMemory;
+  console.log('_app.js => MyApp => clientHintDeviceMemory: ', clientHintDeviceMemory);
 
   let animationAllowed = true;
+  const memoryStatus = useMemoryStatus();
+  if (!memoryStatus) return <Loading />;
+
+  const { overLoaded } = clientHintDeviceMemory ? false : memoryStatus;
+  
   if (manualEnabled) {
     animationAllowed = isAnimationOn;
   } else {
@@ -48,11 +52,11 @@ const MyApp = ({ Component, pageProps, router }) => {
         enableManualAnimationHandler: enableManualAnimationHandler,
         toggleAnimationHandler: toggleAnimationHandler
       }}>
-        { animationAllowed ? (
-          <AnimatePresence exitBeforeEnter>
-            <Component {...pageProps} key={router.route} />
-          </AnimatePresence>
-        ) : (
+      {animationAllowed ? (
+        <AnimatePresence exitBeforeEnter>
+          <Component {...pageProps} key={router.route} />
+        </AnimatePresence>
+      ) : (
           <Component {...pageProps} key={router.route} />
         )}
     </AnimationEmulationContext.Provider>
@@ -64,7 +68,7 @@ MyApp.getInitialProps = async ({ Component, ctx }) => {
   if (Component.getInitialProps) {
     pageProps = await Component.getInitialProps(ctx);
   }
-  return {pageProps};
+  return { pageProps };
 };
 
 export default MyApp;

@@ -24,12 +24,16 @@ const layoutStyle = {
   border: '1px solid #DDD'
 };
 
-const Layout = ({ children }) => (
+const Layout = ({ children, clientHintDeviceMemory }) => {
+  return (
   <div style={layoutStyle}>
     <Head>
       <title>Adaptive Animation</title>
     </Head>
-    <MemoryStatus />
+    { clientHintDeviceMemory ? 
+      <div style={{'display':'flex'}}><h3>SSR:</h3><h4>[CH DeviceMemory: {clientHintDeviceMemory}GByte]</h4></div> : 
+      <MemoryStatus />
+    }
     <div className="page-wrapper">
       <div className="content-wrapper">
         {children}
@@ -70,6 +74,7 @@ const Layout = ({ children }) => (
     `}</style>
     </div>
   </div>
-);
+  )
+};
 
 export default Layout;

@@ -65,13 +65,13 @@ const backVariants = {
   }
 };
 
-const AnimationPost = ({ post }) => {
+const AnimationPost = ({ post, clientHintDeviceMemory }) => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
   return (
-    <Layout>
+    <Layout clientHintDeviceMemory={clientHintDeviceMemory}>
       <div className="container post">
         <motion.div initial="exit" animate="enter" exit="exit">
           <motion.img variants={imageVariants} src={`/static/images/${post.id}.jpg`} />
@@ -98,9 +98,10 @@ const AnimationPost = ({ post }) => {
   );
 };
 
-AnimationPost.getInitialProps = ({ query }) => {
+AnimationPost.getInitialProps = ({ query, req }) => {
   const post = posts.find(post => post.id === parseInt(query.index));
-  return {post};
+  const clientHintDeviceMemory = req ? req.headers['device-memory'] : null;
+  return {post, clientHintDeviceMemory};
 };
 
 export default AnimationPost;

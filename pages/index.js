@@ -14,15 +14,28 @@
  * limitations under the License.
  */
 
+import Head from 'next/head';
+
 import Layout from '../components/layout';
 import AdaptivePostList from '../pages/AdaptivePostList';
 
-const Home = () => (
-  <Layout>
+const Index = ({ clientHintDeviceMemory }) => {
+  return (
+  <Layout clientHintDeviceMemory={clientHintDeviceMemory}>
+    <Head>
+      <meta httpEquiv='Accept-CH' content='DPR, Width, Viewport-Width, ECT, Device-Memory' />
+      <meta httpEquiv='Accept-CH-Lifetime' content='86400' />
+    </Head>
     <div className='container'>
       <AdaptivePostList />
     </div>
   </Layout>
-);
+  )
+};
 
-export default Home;
+Index.getInitialProps = ({ req }) => {
+  const clientHintDeviceMemory = req ? req.headers['device-memory'] : null;
+  return { clientHintDeviceMemory }
+};
+
+export default Index;
