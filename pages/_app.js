@@ -20,14 +20,18 @@ const MyApp = ({ Component, pageProps, router }) => {
     }
   }, []);
   
+  // ray test touch <
   const clientHintDeviceMemory = pageProps.clientHintDeviceMemory;
   console.log('_app.js => MyApp => clientHintDeviceMemory: ', clientHintDeviceMemory);
+  // ray test touch >
 
+  // ray test touch <
   let animationAllowed = true;
   const memoryStatus = useMemoryStatus();
   if (!memoryStatus) return <Loading />;
 
   const { overLoaded } = clientHintDeviceMemory ? false : memoryStatus;
+  // ray test touch >
   
   if (manualEnabled) {
     animationAllowed = isAnimationOn;
@@ -52,13 +56,15 @@ const MyApp = ({ Component, pageProps, router }) => {
         enableManualAnimationHandler: enableManualAnimationHandler,
         toggleAnimationHandler: toggleAnimationHandler
       }}>
-      {animationAllowed ? (
+      {/* ray test touch < */}
+      { animationAllowed ? (
         <AnimatePresence exitBeforeEnter>
           <Component {...pageProps} key={router.route} />
         </AnimatePresence>
       ) : (
-          <Component {...pageProps} key={router.route} />
-        )}
+        <Component {...pageProps} key={router.route} />
+      ) }
+      {/* ray test touch > */}
     </AnimationEmulationContext.Provider>
   )
 };
@@ -68,7 +74,7 @@ MyApp.getInitialProps = async ({ Component, ctx }) => {
   if (Component.getInitialProps) {
     pageProps = await Component.getInitialProps(ctx);
   }
-  return { pageProps };
+  return {pageProps};
 };
 
 export default MyApp;

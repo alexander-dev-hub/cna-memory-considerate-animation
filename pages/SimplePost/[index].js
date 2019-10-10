@@ -18,17 +18,21 @@ import React, { useEffect } from 'react';
 import Link from 'next/link';
 
 import posts from '../../data/posts';
-import Layout from '../../components/layout';
+import Layout from '../../components/Layout';
 import PostInfo from '../../components/PostInfo';
 
+// ray test touch <
 const SimplePost = ({ post, clientHintDeviceMemory }) => {
+// ray test touch >
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
   return (
+    // ray test touch <
     <Layout clientHintDeviceMemory={clientHintDeviceMemory}>
-      <div className="container post">
+    {/* ray test touch > */}
+      <div className='container post'>
         <div>
           <img src={`/static/images/${post.id}.jpg`} />
           <div>
@@ -36,7 +40,7 @@ const SimplePost = ({ post, clientHintDeviceMemory }) => {
             <p>{post.text}</p>
           </div>
           <div>
-            <Link href="/">
+            <Link href='/'>
               <a>Back to list</a>
             </Link>
           </div>
@@ -54,10 +58,12 @@ const SimplePost = ({ post, clientHintDeviceMemory }) => {
   );
 };
 
+// ray test touch <
 SimplePost.getInitialProps = ({ query, req }) => {
   const post = posts.find(post => post.id === parseInt(query.index));
   const clientHintDeviceMemory = req ? req.headers['device-memory'] : null;
   return {post, clientHintDeviceMemory};
 };
+// ray test touch >
 
 export default SimplePost;

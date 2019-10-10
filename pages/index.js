@@ -16,26 +16,32 @@
 
 import Head from 'next/head';
 
-import Layout from '../components/layout';
-import AdaptivePostList from '../pages/AdaptivePostList';
+import Layout from '../components/Layout';
+// ray test touch <
+import AdaptivePostList from '../components/AdaptivePostList';
+// ray test touch >
 
 const Index = ({ clientHintDeviceMemory }) => {
   return (
-  <Layout clientHintDeviceMemory={clientHintDeviceMemory}>
-    <Head>
-      <meta httpEquiv='Accept-CH' content='DPR, Width, Viewport-Width, ECT, Device-Memory' />
-      <meta httpEquiv='Accept-CH-Lifetime' content='86400' />
-    </Head>
-    <div className='container'>
-      <AdaptivePostList />
-    </div>
-  </Layout>
-  )
+    <Layout clientHintDeviceMemory={clientHintDeviceMemory}>
+      {/* ray test touch < */}
+      <Head>
+        <meta httpEquiv='Accept-CH' content='DPR, Width, Viewport-Width, ECT, Device-Memory' />
+        <meta httpEquiv='Accept-CH-Lifetime' content='86400' />
+      </Head>
+      {/* ray test touch > */}
+      <div className='container'>
+        <AdaptivePostList />
+      </div>
+    </Layout>
+  );
 };
 
+// ray test touch <
 Index.getInitialProps = ({ req }) => {
   const clientHintDeviceMemory = req ? req.headers['device-memory'] : null;
-  return { clientHintDeviceMemory }
+  return {clientHintDeviceMemory};
 };
+// ray test touch >
 
 export default Index;

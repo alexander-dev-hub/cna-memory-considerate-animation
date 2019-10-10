@@ -16,10 +16,10 @@
 
 import { Suspense, Fragment, useContext } from 'react';
 
-import AnimationEmulationContext from '../../components/AnimationEmulationContext';
-import AnimationPostList from '../../components/AnimationPostList';
-import SimplePostList from '../../components/SimplePostList';
-import Nav from '../../components/Nav';
+import AnimationEmulationContext from '../AnimationEmulationContext';
+import AnimationPostList from '../AnimationPostList';
+import SimplePostList from '../SimplePostList';
+import Nav from '../Nav';
 import posts from '../../data/posts';
 
 const Loading = () => <Fragment>Loading...</Fragment>;

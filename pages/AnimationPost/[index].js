@@ -19,7 +19,7 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 
 import posts from '../../data/posts';
-import Layout from '../../components/layout';
+import Layout from '../../components/Layout';
 import PostInfo from '../../components/PostInfo';
 
 const easing = [0.175, 0.85, 0.42, 0.96];
@@ -65,22 +65,26 @@ const backVariants = {
   }
 };
 
+// ray test touch <
 const AnimationPost = ({ post, clientHintDeviceMemory }) => {
+// ray test touch >
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
   return (
+    // ray test touch <
     <Layout clientHintDeviceMemory={clientHintDeviceMemory}>
-      <div className="container post">
-        <motion.div initial="exit" animate="enter" exit="exit">
+    {/* ray test touch > */}
+      <div className='container post'>
+        <motion.div initial='exit' animate='enter' exit='exit'>
           <motion.img variants={imageVariants} src={`/static/images/${post.id}.jpg`} />
           <motion.div variants={textVariants}>
             <PostInfo post={post} />
             <p>{post.text}</p>
           </motion.div>
           <motion.div variants={backVariants}>
-            <Link href="/">
+            <Link href='/'>
               <a>Back to list</a>
             </Link>
           </motion.div>
@@ -98,10 +102,12 @@ const AnimationPost = ({ post, clientHintDeviceMemory }) => {
   );
 };
 
+// ray test touch <
 AnimationPost.getInitialProps = ({ query, req }) => {
   const post = posts.find(post => post.id === parseInt(query.index));
   const clientHintDeviceMemory = req ? req.headers['device-memory'] : null;
   return {post, clientHintDeviceMemory};
 };
+// ray test touch >
 
 export default AnimationPost;
