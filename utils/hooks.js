@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+// ray test touch <
 import { useState, useEffect } from 'react';
 
 const UNSUPPORT_MESSAGE = 'The Memory Status API is not supported on this platform.';
@@ -80,3 +81,4 @@ const useMemoryStatus = () => {
 };
 
 export { useMemoryStatus };
+// ray test touch >

@@ -31,11 +31,13 @@ const Layout = ({ children, clientHintDeviceMemory }) => {
       <Head>
         <title>Adaptive Animation</title>
       </Head>
+      {/* ray test touch < */}
       { clientHintDeviceMemory ? (
         <MemoryStatusByClientHint clientHintDeviceMemory={clientHintDeviceMemory} />
       ) : (
         <MemoryStatusByReactHook />
       ) }
+      {/* ray test touch > */}
       <div className="page-wrapper">
         <div className="content-wrapper">
           {children}
