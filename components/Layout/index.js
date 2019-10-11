@@ -16,7 +16,8 @@
 
 import Head from 'next/head';
 
-import MemoryStatus from '../MemoryStatus';
+import MemoryStatusByClientHint from '../MemoryStatusByClientHint';
+import MemoryStatusByReactHook from '../MemoryStatusByReactHook';
 
 const layoutStyle = {
   margin: 10,
@@ -30,13 +31,11 @@ const Layout = ({ children, clientHintDeviceMemory }) => {
       <Head>
         <title>Adaptive Animation</title>
       </Head>
-      {/* ray test touch < */}
       { clientHintDeviceMemory ? (
-        <div style={{'display':'flex'}}><h3>SSR:</h3><h4>[CH DeviceMemory: {clientHintDeviceMemory}GByte]</h4></div>
+        <MemoryStatusByClientHint clientHintDeviceMemory={clientHintDeviceMemory} />
       ) : (
-        <MemoryStatus />
+        <MemoryStatusByReactHook />
       ) }
-      {/* ray test touch > */}
       <div className="page-wrapper">
         <div className="content-wrapper">
           {children}

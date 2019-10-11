@@ -65,17 +65,13 @@ const backVariants = {
   }
 };
 
-// ray test touch <
 const AnimationPost = ({ post, clientHintDeviceMemory }) => {
-// ray test touch >
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
   return (
-    // ray test touch <
     <Layout clientHintDeviceMemory={clientHintDeviceMemory}>
-    {/* ray test touch > */}
       <div className='container post'>
         <motion.div initial='exit' animate='enter' exit='exit'>
           <motion.img variants={imageVariants} src={`/static/images/${post.id}.jpg`} />
@@ -102,12 +98,10 @@ const AnimationPost = ({ post, clientHintDeviceMemory }) => {
   );
 };
 
-// ray test touch <
 AnimationPost.getInitialProps = ({ query, req }) => {
   const post = posts.find(post => post.id === parseInt(query.index));
   const clientHintDeviceMemory = req ? req.headers['device-memory'] : null;
   return {post, clientHintDeviceMemory};
 };
-// ray test touch >
 
 export default AnimationPost;

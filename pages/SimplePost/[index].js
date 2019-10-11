@@ -21,17 +21,13 @@ import posts from '../../data/posts';
 import Layout from '../../components/Layout';
 import PostInfo from '../../components/PostInfo';
 
-// ray test touch <
 const SimplePost = ({ post, clientHintDeviceMemory }) => {
-// ray test touch >
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
   return (
-    // ray test touch <
     <Layout clientHintDeviceMemory={clientHintDeviceMemory}>
-    {/* ray test touch > */}
       <div className='container post'>
         <div>
           <img src={`/static/images/${post.id}.jpg`} />
@@ -58,12 +54,10 @@ const SimplePost = ({ post, clientHintDeviceMemory }) => {
   );
 };
 
-// ray test touch <
 SimplePost.getInitialProps = ({ query, req }) => {
   const post = posts.find(post => post.id === parseInt(query.index));
   const clientHintDeviceMemory = req ? req.headers['device-memory'] : null;
   return {post, clientHintDeviceMemory};
 };
-// ray test touch >
 
 export default SimplePost;

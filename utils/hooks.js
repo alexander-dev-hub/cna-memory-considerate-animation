@@ -16,7 +16,7 @@
 
 import { useState, useEffect } from 'react';
 
-const unsupportMessage = 'The Memory Status API is not supported on this platform.';
+const UNSUPPORT_MESSAGE = 'The Memory Status API is not supported on this platform.';
 
 // Tune these for your application
 const MAX_MEMORY_LIMIT = 50 * 1048576; // 50MB
@@ -63,6 +63,7 @@ const useMemoryStatus = () => {
       if (usedMemoryPercent > MAX_PERCENT_THRESHOLD) {
         overLoaded = true;
       }
+
       setMemoryStatus({
         totalJSHeapSize: getTotalJSHeapSize(),
         usedJSHeapSize: getUsedJSHeapSize(),
@@ -71,7 +72,7 @@ const useMemoryStatus = () => {
         overLoaded
       });
     } else {
-      setMemoryStatus({ unsupportMessage });
+      setMemoryStatus({UNSUPPORT_MESSAGE});
     }
   }, []);
 

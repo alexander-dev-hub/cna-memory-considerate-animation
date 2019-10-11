@@ -14,22 +14,12 @@
  * limitations under the License.
  */
 
-import Head from 'next/head';
-
 import Layout from '../components/Layout';
-// ray test touch <
 import AdaptivePostList from '../components/AdaptivePostList';
-// ray test touch >
 
 const Index = ({ clientHintDeviceMemory }) => {
   return (
     <Layout clientHintDeviceMemory={clientHintDeviceMemory}>
-      {/* ray test touch < */}
-      <Head>
-        <meta httpEquiv='Accept-CH' content='DPR, Width, Viewport-Width, ECT, Device-Memory' />
-        <meta httpEquiv='Accept-CH-Lifetime' content='86400' />
-      </Head>
-      {/* ray test touch > */}
       <div className='container'>
         <AdaptivePostList />
       </div>
@@ -37,11 +27,10 @@ const Index = ({ clientHintDeviceMemory }) => {
   );
 };
 
-// ray test touch <
 Index.getInitialProps = ({ req }) => {
   const clientHintDeviceMemory = req ? req.headers['device-memory'] : null;
+  console.log('[Index getInitialProps] Server Side Rendering ', clientHintDeviceMemory ? true : false);
   return {clientHintDeviceMemory};
 };
-// ray test touch >
 
 export default Index;

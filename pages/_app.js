@@ -5,34 +5,27 @@ import { AnimatePresence } from 'framer-motion';
 import { useMemoryStatus } from '../utils/hooks';
 import AnimationEmulationContext from '../components/AnimationEmulationContext';
 
+const CLIENT_HINT_MEMORY_LIMIT = 4; // Threshold is 4GB RAM
+
 const Loading = () => <Fragment>Loading...</Fragment>;
 
 const MyApp = ({ Component, pageProps, router }) => {
   const [manualEnabled, setManualEnabled] = useState(false);
   const [isAnimationOn, setIsAnimationOn] = useState(true);
-
-  useEffect(() => {
-    if (manualEnabled) {
-      setManualEnabled(manualEnabled);
-    }
-    if (isAnimationOn) {
-      setIsAnimationOn(isAnimationOn);
-    }
-  }, []);
-  
-  // ray test touch <
-  const clientHintDeviceMemory = pageProps.clientHintDeviceMemory;
-  console.log('_app.js => MyApp => clientHintDeviceMemory: ', clientHintDeviceMemory);
-  // ray test touch >
-
-  // ray test touch <
-  let animationAllowed = true;
   const memoryStatus = useMemoryStatus();
-  if (!memoryStatus) return <Loading />;
 
-  const { overLoaded } = clientHintDeviceMemory ? false : memoryStatus;
-  // ray test touch >
+  const { clientHintDeviceMemory } = pageProps;
+  console.log('[_app.js MyApp] clientHintDeviceMemory => ', clientHintDeviceMemory);
+  let overLoaded;
+  if (clientHintDeviceMemory) {
+    overLoaded = clientHintDeviceMemory < CLIENT_HINT_MEMORY_LIMIT;
+    console.log('[utils hooks useMemoryStatus] Client Hint Device Memory based Memory Overloaded => ', overLoaded);
+  } else {
+    if (!memoryStatus) return <Loading />;
+    overLoaded = memoryStatus.overLoaded;
+  }
   
+  let animationAllowed;
   if (manualEnabled) {
     animationAllowed = isAnimationOn;
   } else {
@@ -56,7 +49,6 @@ const MyApp = ({ Component, pageProps, router }) => {
         enableManualAnimationHandler: enableManualAnimationHandler,
         toggleAnimationHandler: toggleAnimationHandler
       }}>
-      {/* ray test touch < */}
       { animationAllowed ? (
         <AnimatePresence exitBeforeEnter>
           <Component {...pageProps} key={router.route} />
@@ -64,7 +56,6 @@ const MyApp = ({ Component, pageProps, router }) => {
       ) : (
         <Component {...pageProps} key={router.route} />
       ) }
-      {/* ray test touch > */}
     </AnimationEmulationContext.Provider>
   )
 };

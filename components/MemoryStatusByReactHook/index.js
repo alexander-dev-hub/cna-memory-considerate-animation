@@ -17,7 +17,7 @@
 import { Fragment } from 'react';
 import { useMemoryStatus } from '../../utils/hooks';
 
-const MemoryStatus = () => {
+const MemoryStatusByReactHook = () => {
   const memoryStatus = useMemoryStatus();
   if (!memoryStatus) return <Fragment>Loading...</Fragment>;
 
@@ -99,4 +99,4 @@ const MemoryStatus = () => {
   );
 };
 
-export default MemoryStatus;
+export default MemoryStatusByReactHook;
