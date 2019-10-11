@@ -14,13 +14,7 @@
  * limitations under the License.
  */
 
-import { Fragment } from 'react';
-import { useMemoryStatus } from '../../utils/hooks';
-
-const MemoryStatusByReactHook = () => {
-  const memoryStatus = useMemoryStatus();
-  if (!memoryStatus) return <Fragment>Loading...</Fragment>;
-
+const MemoryStatusByReactHook = ({ memoryStatus }) => {
   const {
     totalJSHeapSize,
     usedJSHeapSize,
@@ -48,8 +42,8 @@ const MemoryStatusByReactHook = () => {
       value: `${deviceMemory} (GByte)`
     },
     {
-      label: 'Memory overLoaded?',
-      value: overLoaded ? 'Yes' : 'No'
+      label: 'Memory Overloaded?',
+      value: overLoaded ? 'Yes, so we have no animation.' : 'No, so we have animation.'
     }
   ];
 

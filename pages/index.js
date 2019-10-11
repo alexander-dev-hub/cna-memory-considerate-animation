@@ -14,23 +14,12 @@
  * limitations under the License.
  */
 
-import Layout from '../components/Layout';
 import AdaptivePostList from '../components/AdaptivePostList';
 
-const Index = ({ clientHintDeviceMemory }) => {
-  return (
-    <Layout clientHintDeviceMemory={clientHintDeviceMemory}>
-      <div className='container'>
-        <AdaptivePostList />
-      </div>
-    </Layout>
-  );
-};
-
-Index.getInitialProps = ({ req }) => {
-  const clientHintDeviceMemory = req ? req.headers['device-memory'] : null;
-  console.log('[Index getInitialProps] Server Side Rendering ', clientHintDeviceMemory ? true : false);
-  return {clientHintDeviceMemory};
-};
+const Index = () => (
+  <div className='container'>
+    <AdaptivePostList />
+  </div>
+);
 
 export default Index;

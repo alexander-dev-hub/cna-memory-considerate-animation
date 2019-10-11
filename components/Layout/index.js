@@ -25,19 +25,14 @@ const layoutStyle = {
   border: '1px solid #DDD'
 };
 
-const Layout = ({ children, clientHintDeviceMemory }) => {
+const Layout = ({ children, clientHintDeviceMemory, memoryStatus }) => {
   return (
     <div style={layoutStyle}>
       <Head>
         <title>Adaptive Animation</title>
       </Head>
-      {/* ray test touch < */}
-      { clientHintDeviceMemory ? (
-        <MemoryStatusByClientHint clientHintDeviceMemory={clientHintDeviceMemory} />
-      ) : (
-        <MemoryStatusByReactHook />
-      ) }
-      {/* ray test touch > */}
+      <MemoryStatusByClientHint clientHintDeviceMemory={clientHintDeviceMemory} />
+      <MemoryStatusByReactHook memoryStatus={memoryStatus} />
       <div className="page-wrapper">
         <div className="content-wrapper">
           {children}
